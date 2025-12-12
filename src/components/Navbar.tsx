@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
     { label: 'CONTACT', id: 'contact' },
   ];
 
-  const logoSrc = "images/logo.png";
+  const logoSrc = "/images/logo.png";
 
   return (
     <nav className="sticky top-0 left-0 w-full z-50 bg-white border-b border-gray-100 py-6 md:py-8">

@@ -116,8 +116,8 @@ export const NEWS: NewsItem[] = [
 ];
 
 export const HERO_IMAGES = [
-  'https://tubaboy.github.io/coffee-website/images/hero_img_1.jpg',
-  'https://tubaboy.github.io/coffee-website/images/hero_img_2.jpg',
-  'https://tubaboy.github.io/coffee-website/images/hero_img_3.jpg',
-  'https://tubaboy.github.io/coffee-website/images/hero_img_4.JPG',
+  '/images/hero_img_1.jpg',
+  '/images/hero_img_2.jpg',
+  '/images/hero_img_3.jpg',
+  '/images/hero_img_4.JPG',
 ];
