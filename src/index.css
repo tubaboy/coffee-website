@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* 
+  Tailwind v4 handles base, components, and utilities automatically via the import.
+  Custom CSS can be added below.
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #333; /* Dark gray for a minimalist look */
+  color: #fff;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
