@@ -21,9 +21,9 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { label: 'MENU', id: 'menu' },
-    { label: 'BEANS', id: 'beans' },
     { label: 'NEWS', id: 'news' },
+    { label: 'BEANS', id: 'beans' },
+    { label: 'DRINK MENU', id: 'menu' },
     { label: 'SHOP', id: 'shop' },
     { label: 'CONTACT', id: 'contact' },
   ];

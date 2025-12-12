@@ -42,7 +42,7 @@ export const MenuSection: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12 lg:px-24">
         <FadeIn>
           <div className="mb-16 text-center">
-            <h3 className="text-sm font-bold tracking-[0.3em] uppercase mb-2">Menu</h3>
+            <h3 className="text-sm font-bold tracking-[0.3em] uppercase mb-2">DRINK Menu</h3>
             <div className="w-8 h-[1px] bg-black mx-auto"></div>
           </div>
         </FadeIn>

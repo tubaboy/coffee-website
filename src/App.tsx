@@ -13,9 +13,9 @@ function App() {
       
       <main className="flex-grow">
         <Hero />
-        <MenuSection />
-        <BeansSection />
         <NewsSection />
+        <BeansSection />
+        <MenuSection />
         <ShopInfo />
         <Contact />
       </main>

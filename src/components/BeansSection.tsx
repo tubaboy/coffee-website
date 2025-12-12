@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { CoffeeBean } from '../types';
 import { COFFEE_BEANS } from '../constants';
-import { X, ExternalLink } from 'lucide-react';
+import { X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { FadeIn } from './FadeIn';
 
 interface BeanApiResponse {
@@ -20,6 +20,8 @@ export const BeansSection: React.FC = () => {
   const [beans, setBeans] = useState<CoffeeBean[]>([]);
   const [selectedBean, setSelectedBean] = useState<CoffeeBean | null>(null);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     let isMounted = true;
@@ -78,6 +80,16 @@ export const BeansSection: React.FC = () => {
     };
   }, []);
 
+  const totalPages = Math.ceil(beans.length / itemsPerPage);
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
+  };
+
   return (
     <section id="beans" className="py-24 bg-gray-50">
       <div className="container mx-auto px-6 md:px-12 lg:px-24">
@@ -93,62 +105,105 @@ export const BeansSection: React.FC = () => {
              <span className="text-xs font-mono text-gray-400 tracking-widest animate-pulse">LOADING BEANS...</span>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-            {beans.map((bean, index) => (
-              <FadeIn key={bean.id} delay={index * 100} className="h-full">
-                <div 
-                  className="group cursor-pointer flex flex-col h-full"
-                  onClick={() => setSelectedBean(bean)}
-                >
-                  <div className="aspect-square w-full overflow-hidden bg-gray-200 mb-6 relative">
-                    <img 
-                      src={bean.imageUrl} 
-                      alt={bean.nameEn} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="text-center mt-auto">
-                    <h4 className="text-base font-medium tracking-wide mb-1">{bean.name}</h4>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">{bean.nameEn}</p>
-                    <div className="flex justify-center items-center space-x-2 text-xs font-mono text-gray-600">
-                      {/* Show first spec price as preview */}
-                      {bean.specs[0] && (
-                        <>
-                          <span>{bean.specs[0].weight}</span>
-                          {bean.specs[0].price && (
-                            <>
-                              <span>/</span>
-                              <span>${bean.specs[0].price}</span>
-                            </>
-                          )}
-                        </>
-                      )}
-                      {bean.specs.length > 1 && <span>...</span>}
+          <FadeIn delay={200}>
+            {/* Slider Container */}
+            <div className="relative overflow-hidden mb-12">
+              <div 
+                className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                style={{ transform: `translateX(-${currentPage * 100}%)` }}
+              >
+                {Array.from({ length: totalPages }).map((_, pageIndex) => (
+                  <div key={pageIndex} className="w-full flex-shrink-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                      {beans
+                        .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
+                        .map((bean) => (
+                          <div 
+                            key={bean.id} 
+                            className="group cursor-pointer flex flex-col h-full"
+                            onClick={() => setSelectedBean(bean)}
+                          >
+                            <div className="aspect-square w-full overflow-hidden bg-gray-200 mb-6 relative">
+                              <img 
+                                src={bean.imageUrl} 
+                                alt={bean.nameEn} 
+                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-105"
+                              />
+                            </div>
+                            <div className="text-center mt-auto">
+                              <h4 className="text-base font-medium tracking-wide mb-1">{bean.name}</h4>
+                              <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">{bean.nameEn}</p>
+                              <div className="flex justify-center items-center space-x-2 text-xs font-mono text-gray-600">
+                                {bean.specs[0] && (
+                                  <>
+                                    <span>{bean.specs[0].weight}</span>
+                                    {bean.specs[0].price && (
+                                      <>
+                                        <span>/</span>
+                                        <span>${bean.specs[0].price}</span>
+                                      </>
+                                    )}
+                                  </>
+                                )}
+                                {bean.specs.length > 1 && <span>...</span>}
+                              </div>
+                            </div>
+                          </div>
+                      ))}
                     </div>
                   </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        )}
+                ))}
+              </div>
+            </div>
 
-        {/* Online Shop Button */}
-        <FadeIn delay={300}>
-          <div className="flex justify-center">
-            <a 
-              href="https://shopee.tw/kaffaforest" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center gap-2"
-            >
-              Online Shop
-              <ExternalLink size={14} />
-            </a>
-          </div>
-        </FadeIn>
+            {/* Minimal Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center mb-16 space-x-8">
+                <button 
+                  onClick={handlePrev} 
+                  disabled={currentPage === 0}
+                  className={`flex items-center space-x-2 p-2 transition-colors duration-300 ${
+                    currentPage === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-black hover:text-gray-500'
+                  }`}
+                >
+                  <ChevronLeft size={16} strokeWidth={1} />
+                  <span className="text-[10px] tracking-[0.2em] uppercase hidden md:inline">Prev</span>
+                </button>
+
+                <div className="text-[10px] tracking-[0.2em] text-gray-400 font-mono">
+                  {currentPage + 1} <span className="mx-2">/</span> {totalPages}
+                </div>
+
+                <button 
+                  onClick={handleNext} 
+                  disabled={currentPage === totalPages - 1}
+                  className={`flex items-center space-x-2 p-2 transition-colors duration-300 ${
+                    currentPage === totalPages - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-black hover:text-gray-500'
+                  }`}
+                >
+                  <span className="text-[10px] tracking-[0.2em] uppercase hidden md:inline">Next</span>
+                  <ChevronRight size={16} strokeWidth={1} />
+                </button>
+              </div>
+            )}
+
+            {/* Online Shop Button */}
+            <div className="flex justify-center">
+              <a 
+                href="https://shopee.tw/kaffaforest" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center gap-2"
+              >
+                Online Shop
+                <ExternalLink size={14} />
+              </a>
+            </div>
+          </FadeIn>
+        )}
       </div>
 
-      {/* Detail Modal Overlay - unchanged logic */}
+      {/* Detail Modal Overlay */}
       {selectedBean && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <div 
