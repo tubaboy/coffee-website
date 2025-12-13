@@ -16,6 +16,9 @@ interface BeanApiResponse {
   buyLink: string;
 }
 
+const CACHE_KEY = 'kaffa_beans_cache';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+
 export const BeansSection: React.FC = () => {
   const [beans, setBeans] = useState<CoffeeBean[]>([]);
   const [selectedBean, setSelectedBean] = useState<CoffeeBean | null>(null);
@@ -27,6 +30,28 @@ export const BeansSection: React.FC = () => {
     let isMounted = true;
 
     const fetchBeans = async () => {
+      // 1. Check Cache
+      try {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+          const { data, timestamp } = JSON.parse(cachedData);
+          const now = Date.now();
+          
+          if (now - timestamp < CACHE_DURATION) {
+            if (isMounted) {
+              setBeans(data);
+              setLoading(false);
+            }
+            // If cache is valid, return early and skip network request
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to parse beans cache', e);
+        localStorage.removeItem(CACHE_KEY);
+      }
+
+      // 2. Fetch from Network if cache missed or expired
       try {
         const response = await fetch('https://tubaboy.zeabur.app/webhook/4e916e75-6b6b-485e-a193-68102a20afde');
         
@@ -59,7 +84,18 @@ export const BeansSection: React.FC = () => {
               buyLink: item.buyLink
             };
           });
+          
           setBeans(formattedBeans);
+
+          // 3. Save to Cache
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+              data: formattedBeans,
+              timestamp: Date.now()
+            }));
+          } catch (e) {
+            console.warn('Failed to save beans to cache', e);
+          }
         }
       } catch (error) {
         console.warn('Error loading coffee beans, falling back to static data:', error);

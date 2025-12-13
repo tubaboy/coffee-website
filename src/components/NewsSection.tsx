@@ -10,6 +10,9 @@ interface NewsApiResponse {
   content: string;
 }
 
+const CACHE_KEY = 'kaffa_news_cache';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
+
 export const NewsSection: React.FC = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +23,28 @@ export const NewsSection: React.FC = () => {
     let isMounted = true;
 
     const fetchNews = async () => {
+      // 1. Check Cache
+      try {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+          const { data, timestamp } = JSON.parse(cachedData);
+          const now = Date.now();
+          
+          if (now - timestamp < CACHE_DURATION) {
+            if (isMounted) {
+              setNews(data);
+              setLoading(false);
+            }
+            // If cache is valid, return early and skip network request
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to parse news cache', e);
+        localStorage.removeItem(CACHE_KEY);
+      }
+
+      // 2. Fetch from Network if cache missed or expired
       try {
         const response = await fetch('https://tubaboy.zeabur.app/webhook/ece60dcc-d7a9-4d99-bd6c-70c70695084c');
         
@@ -35,7 +60,18 @@ export const NewsSection: React.FC = () => {
             title: item.subject,
             content: item.content
           }));
+          
           setNews(formattedNews);
+
+          // 3. Save to Cache
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+              data: formattedNews,
+              timestamp: Date.now()
+            }));
+          } catch (e) {
+            console.warn('Failed to save news to cache', e);
+          }
         }
       } catch (error) {
         console.warn('Error loading news, falling back to static data:', error);
