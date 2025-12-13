@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { CoffeeBean } from '../types';
 import { COFFEE_BEANS } from '../constants';
-import { X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ExternalLink, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { FadeIn } from './FadeIn';
 
 interface BeanApiResponse {
@@ -187,13 +187,25 @@ export const BeansSection: React.FC = () => {
               </div>
             )}
 
-            {/* Online Shop Button */}
-            <div className="flex justify-center">
+            {/* Action Buttons */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+              {/* BEAN LISTS Button */}
+              <a 
+                href="https://drive.google.com/file/d/1wuLPB0Io_1NaEYaDbXYgTTHFl6vpjOWm/view?usp=drive_link" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full md:w-auto px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center justify-center gap-2"
+              >
+                BEAN LISTS
+                <Download size={14} />
+              </a>
+
+              {/* Online Shop Button */}
               <a 
                 href="https://shopee.tw/kaffaforest" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center gap-2"
+                className="w-full md:w-auto px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
                 Online Shop
                 <ExternalLink size={14} />
