@@ -23,7 +23,7 @@ function App() {
       <footer className="bg-white py-12 border-t border-gray-100">
         <div className="container mx-auto px-6 text-center">
           <p className="text-[10px] text-gray-400 tracking-[0.3em] uppercase">
-            © {new Date().getFullYear()} KAFFA FOREST COFFEE. All rights reserved.
+            © {new Date().getFullYear()} KAFFA FOREST COFFEE ROASTERS. All rights reserved.
           </p>
         </div>
       </footer>
