@@ -5,6 +5,9 @@ interface HeroImageApiResponse {
   imgUrl: string;
 }
 
+const CACHE_KEY = 'kaffa_hero_cache';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
+
 export const Hero: React.FC = () => {
   const [images, setImages] = useState<string[]>(HERO_IMAGES);
   const [currentImage, setCurrentImage] = useState(0);
@@ -19,11 +22,33 @@ export const Hero: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fetch images from webhook
+  // Fetch images from webhook with Cache
   useEffect(() => {
     let isMounted = true;
 
     const fetchImages = async () => {
+      // 1. Check Cache
+      try {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+          const { data, timestamp } = JSON.parse(cachedData);
+          const now = Date.now();
+          
+          if (now - timestamp < CACHE_DURATION) {
+            if (isMounted && Array.isArray(data) && data.length > 0) {
+              setImages(data);
+              setCurrentImage(0);
+            }
+            // If cache is valid, return early and skip network request
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to parse hero images cache', e);
+        localStorage.removeItem(CACHE_KEY);
+      }
+
+      // 2. Fetch from Network if cache missed or expired
       try {
         const response = await fetch('https://tubaboy.zeabur.app/webhook/05bc2565-e7b7-4b4b-9545-71c069af8096');
         if (!response.ok) throw new Error('Failed to fetch hero images');
@@ -36,10 +61,21 @@ export const Hero: React.FC = () => {
           if (fetchedUrls.length > 0) {
             setImages(fetchedUrls);
             setCurrentImage(0);
+
+            // 3. Save to Cache
+            try {
+              localStorage.setItem(CACHE_KEY, JSON.stringify({
+                data: fetchedUrls,
+                timestamp: Date.now()
+              }));
+            } catch (e) {
+              console.warn('Failed to save hero images to cache', e);
+            }
           }
         }
       } catch (error) {
         console.warn('Error fetching hero images, using fallback:', error);
+        // On error, we just keep the initial HERO_IMAGES state
       }
     };
 
