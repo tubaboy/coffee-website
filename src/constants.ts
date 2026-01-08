@@ -29,7 +29,8 @@ export const MENU_ITEMS: MenuItem[] = [
   { id: 'a3', category: 'Alcoholic Coffee Beverages', name: '煙燻威士忌拿鐵', nameEn: "Jack Daniel's Coffee Latte", price: 95 },
   { id: 'a4', category: 'Alcoholic Coffee Beverages', name: '櫻桃巧克力甜酒拿鐵', nameEn: 'Soplica Liqueur Coffee Latte', price: 95 },
   { id: 'a5', category: 'Alcoholic Coffee Beverages', name: '蜂蜜波本威士忌拿鐵', nameEn: 'Honey Bourbon Coffee Latte', price: 95 },
-  { id: 'a6', category: 'Alcoholic Coffee Beverages', name: '蘋果波本威士忌拿鐵', nameEn: 'Apple Bourbon Coffee Latte', price: 95 },
+  { id: 'a6', category: 'Alcoholic Coffee Beverages', name: '荔枝酒香拿鐵', nameEn: 'Coffee Latte with Marie Brizard Lychee Liqueurs', price: 95 },
+  { id: 'a7', category: 'Alcoholic Coffee Beverages', name: '奶油糖果甜酒拿鐵', nameEn: 'Coffee Latte with De Kuyper Butterscotch Liqueur', price: 95 },
 
   // Cold Brew Beverages
   { id: 'c1', category: 'Cold Brew Beverages', name: '18小時精釀冷萃', nameEn: 'Cold Brew', price: 90 },

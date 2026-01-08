@@ -238,7 +238,7 @@ export const BeansSection: React.FC = () => {
 
               {/* Online Shop Button */}
               <a 
-                href="https://shopee.tw/kaffaforest" 
+                href="https://myship.7-11.com.tw/general/detail/GM2601011214904" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full md:w-auto px-12 py-3 border border-black text-xs font-bold tracking-[0.3em] uppercase hover:bg-black hover:text-white transition-all duration-300 inline-flex items-center justify-center gap-2"
