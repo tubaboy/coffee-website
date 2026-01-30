@@ -53,7 +53,7 @@ export const BeansSection: React.FC = () => {
 
       // 2. Fetch from Network if cache missed or expired
       try {
-        const response = await fetch('https://tubaboy.zeabur.app/webhook/4e916e75-6b6b-485e-a193-68102a20afde');
+        const response = await fetch('https://tawei-n8n.zeabur.app/webhook/4e916e75-6b6b-485e-a193-68102a20afde');
         
         if (!response.ok) throw new Error('Failed to fetch beans');
         
