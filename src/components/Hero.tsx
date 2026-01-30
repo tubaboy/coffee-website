@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
 
       // 2. Fetch from Network if cache missed or expired
       try {
-        const response = await fetch('https://tubaboy.zeabur.app/webhook/05bc2565-e7b7-4b4b-9545-71c069af8096');
+        const response = await fetch('https://tawei-n8n.zeabur.app/webhook/05bc2565-e7b7-4b4b-9545-71c069af8096');
         if (!response.ok) throw new Error('Failed to fetch hero images');
         
         const data: HeroImageApiResponse[] = await response.json();
