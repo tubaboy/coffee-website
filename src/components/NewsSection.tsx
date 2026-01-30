@@ -46,7 +46,7 @@ export const NewsSection: React.FC = () => {
 
       // 2. Fetch from Network if cache missed or expired
       try {
-        const response = await fetch('https://tubaboy.zeabur.app/webhook/ece60dcc-d7a9-4d99-bd6c-70c70695084c');
+        const response = await fetch('https://tawei-n8n.zeabur.app/webhook/ece60dcc-d7a9-4d99-bd6c-70c70695084c');
         
         if (!response.ok) {
           throw new Error('Network response was not ok');
