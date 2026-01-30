@@ -52,7 +52,7 @@ export const Contact: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://tubaboy.zeabur.app/webhook/81bedc8f-8630-41d9-b0b9-3df38096027f', {
+      const response = await fetch('https://tawei-n8n.zeabur.app/webhook/81bedc8f-8630-41d9-b0b9-3df38096027f', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
