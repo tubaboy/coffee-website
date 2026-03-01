@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Between 配方咖啡 | 平衡之美</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* 更新 Hero 區塊背景圖：使用純咖啡豆的視覺 */
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(26,26,26,1) 100%), 
+                        url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .blend-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .blend-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #d4a373;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .roast-meter {
+            height: 8px;
+            background: linear-gradient(to right, #d4a373, #4a3728);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .roast-indicator {
+            position: absolute;
+            left: 65%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 4px solid #d4a373;
+            border-radius: 50%;
+        }
+
+        .buy-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .buy-button:hover {
+            background-color: #d4a373;
+            color: black;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-black bg-opacity-80 backdrop-blur-md">
+        <div class="text-2xl font-bold tracking-widest serif text-[#d4a373]">IN BETWEEN</div>
+        <div class="hidden md:flex space-x-8 text-sm tracking-widest">
+            <a href="#about" class="hover:text-[#d4a373] transition">關於配方</a>
+            <a href="#flavor" class="hover:text-[#d4a373] transition">風味敘事</a>
+            <a href="#origin" class="hover:text-[#d4a373] transition">產地組成</a>
+            <a href="#brew" class="hover:text-[#d4a373] transition">沖煮建議</a>
+        </div>
+        <a href="#purchase" class="bg-[#d4a373] text-black px-6 py-2 text-sm font-bold rounded-full hover:bg-[#e9c49a] transition">立即選購</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-screen flex items-center justify-center text-center px-4 hero-gradient">
+        <div class="animate__animated animate__fadeIn">
+            <p class="text-[#d4a373] tracking-[0.3em] mb-4 text-sm md:text-base">MEDIUM TO MEDIUM-DARK ROAST</p>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 serif leading-tight">In Between <br><span class="text-3xl md:text-5xl opacity-80">介於之間</span></h1>
+            <p class="max-w-2xl mx-auto text-lg text-gray-300 font-light leading-relaxed">
+                在咖啡世界裡，「介於之間」是一種難以掌握卻極具魅力的狀態。<br>
+                融合中焙與中深焙特色，展現香氣與醇厚的完美平衡。
+            </p>
+            <div class="mt-12 flex flex-col items-center">
+                <p class="mb-4 text-xs tracking-widest text-gray-500">烘焙程度</p>
+                <div class="w-64 roast-meter">
+                    <div class="roast-indicator"></div>
+                </div>
+                <div class="w-64 flex justify-between mt-2 text-[10px] text-gray-400">
+                    <span>中焙</span>
+                    <span>中深焙</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Philosophy -->
+    <section id="about" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="scroll-reveal">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000&auto=format&fit=crop" 
+                     alt="[手沖咖啡]" 
+                     class="rounded-lg shadow-2xl object-cover w-full h-[500px]"
+                     onerror="this.src='https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1000&auto=format&fit=crop'">
+            </div>
+            <div class="scroll-reveal">
+                <h2 class="text-3xl font-bold mb-8 serif">遊走於風味的交界</h2>
+                <p class="text-gray-400 mb-6 leading-relaxed">
+                    這支豆子不僅在烘焙上挑戰技術極限，更在沖煮時展現出令人驚喜的易控性。
+                </p>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    無論是手沖、濃縮或奶飲，都能輕鬆釋放出中焙的果香與中深焙的尾韻，讓每一口都充滿層次與故事。它不張揚，卻有著令人安心的穩定性。
+                </p>
+                <div class="border-l-4 border-[#d4a373] pl-6 py-2 italic text-lg text-gray-300">
+                    「它不極端，卻在風味的交界處，展現出最迷人的平衡。」
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flavor Narrative -->
+    <section id="flavor" class="py-24 bg-[#111]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold serif mb-4">風味敘事</h2>
+                <div class="h-1 w-20 bg-[#d4a373] mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="blend-card p-10 rounded-2xl text-center scroll-reveal">
+                    <div class="text-[#d4a373] text-4xl mb-6">🍋</div>
+                    <h3 class="text-xl font-bold mb-4 serif">前段香氣</h3>
+                    <p class="text-gray-400 text-sm leading-loose">
+                        柑橘的清新<br>白花的優雅<br>堅果的溫潤
+                    </p>
+                </div>
+                <div class="blend-card p-10 rounded-2xl text-center scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="text-[#d4a373] text-4xl mb-6">☕</div>
+                    <h3 class="text-xl font-bold mb-4 serif">中段口感</h3>
+                    <p class="text-gray-400 text-sm leading-loose">
+                        伯爵茶的細緻<br>果乾的酸甜交織
+                    </p>
+                </div>
+                <div class="blend-card p-10 rounded-2xl text-center scroll-reveal" style="transition-delay: 0.4s;">
+                    <div class="text-[#d4a373] text-4xl mb-6">🍯</div>
+                    <h3 class="text-xl font-bold mb-4 serif">尾韻表現</h3>
+                    <p class="text-gray-400 text-sm leading-loose">
+                        紅糖的甜香<br>滑順醇厚的口感
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origins -->
+    <section id="origin" class="py-24 px-6 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-16 serif text-center">🌍 產地組成</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="p-6 border border-gray-800 rounded-xl scroll-reveal">
+                <h4 class="text-[#d4a373] font-bold mb-2">Nicaragua</h4>
+                <p class="text-sm text-gray-400">堅果與可可的溫潤底蘊</p>
+            </div>
+            <div class="p-6 border border-gray-800 rounded-xl scroll-reveal" style="transition-delay: 0.1s;">
+                <h4 class="text-[#d4a373] font-bold mb-2">Guatemala</h4>
+                <p class="text-sm text-gray-400">注入白花與茶感的優雅層次</p>
+            </div>
+            <div class="p-6 border border-gray-800 rounded-xl scroll-reveal" style="transition-delay: 0.2s;">
+                <h4 class="text-[#d4a373] font-bold mb-2">Brazil</h4>
+                <p class="text-sm text-gray-400">穩定的甜感與厚實口感</p>
+            </div>
+            <div class="p-6 border border-gray-800 rounded-xl scroll-reveal" style="transition-delay: 0.3s;">
+                <h4 class="text-[#d4a373] font-bold mb-2">Tanzania</h4>
+                <p class="text-sm text-gray-400">果乾與柑橘的明亮酸質</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brewing Suggestions -->
+    <section id="brew" class="py-24 bg-zinc-900 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2 scroll-reveal">
+                    <h2 class="text-4xl font-bold serif mb-8">品飲建議</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed">
+                        In Between 是一支能隨著沖煮方式展現不同面貌的咖啡豆。它能陪伴你從早晨到夜晚，無論心情在哪個段落，它都能剛好落在你需要的「之間」。
+                    </p>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <span class="p-2 bg-[#d4a373] rounded-lg text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+                            </span>
+                            <div>
+                                <h4 class="font-bold">手沖濾泡</h4>
+                                <p class="text-sm text-gray-400 mt-1">果香明亮清新，層次分明</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="p-2 bg-[#d4a373] rounded-lg text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h-2"/><path d="m19.07 19.07-1.41-1.41"/><path d="M12 22v-2"/><path d="m6.34 17.66-1.41 1.41"/><path d="M2 12h2"/><path d="m7.76 7.76-1.41-1.41"/></svg>
+                            </span>
+                            <div>
+                                <h4 class="font-bold">義式濃縮</h4>
+                                <p class="text-sm text-gray-400 mt-1">醇厚飽滿，油脂感豐富</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="p-2 bg-[#d4a373] rounded-lg text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8Z"/><path d="M12 18v3"/><path d="M8 21h8"/></svg>
+                            </span>
+                            <div>
+                                <h4 class="font-bold">加入鮮奶</h4>
+                                <p class="text-sm text-gray-400 mt-1">展現出紅糖與堅果的迷人甜感</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?q=80&w=1000&auto=format&fit=crop" 
+                         alt="[咖啡拉花]" 
+                         class="rounded-3xl rotate-3 shadow-2xl object-cover w-full h-[500px]"
+                         onerror="this.src='https://images.unsplash.com/photo-1536939459926-301728717817?q=80&w=1000&auto=format&fit=crop'">
+                </div>
+            </div>
+        </div>
+        <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-[#d4a373] opacity-5 rounded-full blur-3xl"></div>
+    </section>
+
+    <!-- Purchase Options Section -->
+    <section id="purchase" class="py-24 px-6 bg-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-3xl md:text-4xl font-bold serif mb-4">選購 In Between</h2>
+                <p class="text-gray-500">選擇您最方便的購買管道</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- LINE -->
+                <a href="https://lin.ee/e7EDgGb" target="_blank" class="buy-button p-8 rounded-2xl border border-gray-800 text-center flex flex-col items-center scroll-reveal">
+                    <div class="w-12 h-12 mb-4 flex items-center justify-center text-[#d4a373]">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M24 10.304c0-4.58-4.646-8.304-10.36-8.304-5.714 0-10.36 3.724-10.36 8.304 0 4.108 3.682 7.548 8.654 8.164l-.622 2.328c-.07.258.182.478.434.332l3.708-2.14c.394.058.8.088 1.212.088 5.714 0 10.36-3.724 10.36-8.304zm-14.744 3.328h-2.112c-.228 0-.414-.184-.414-.414v-4.108c0-.228.184-.414.414-.414h.168c.228 0 .414.184.414.414v3.692h1.528c.228 0 .414.184.414.414v.016c0 .23-.186.416-.414.416zm3.328-4.522v4.108c0 .228-.184.414-.414.414h-.168c-.228 0-.414-.184-.414-.414v-4.108c0-.228.184-.414.414-.414h.168c.23 0 .414.186.414.414zm4.456 4.522h-2.094c-.23 0-.416-.184-.416-.414V9.11c0-.228.184-.414.414-.414h.168c.228 0 .414.184.414.414v3.278l1.512-3.278c.07-.15.222-.246.388-.246h.17c.306 0 .498.332.348.598l-1.378 2.45 1.506 1.838c.156.19.02.476-.226.476h-.17c-.126 0-.244-.056-.322-.152l-1.122-1.372v1.372c0 .23-.186.416-.416.416zm4.01 0h-2.112c-.228 0-.414-.184-.414-.414V9.11c0-.228.184-.414.414-.414h2.112c.228 0 .414.184.414.414v.016c0 .23-.186.416-.414.416h-1.528V10.4h1.528c.228 0 .414.184.414.414v.016c0 .23-.186.416-.414.416h-1.528v1.176h1.528c.228 0 .414.184.414.414v.016c0 .23-.186.416-.414.416z"/></svg>
+                    </div>
+                    <span class="font-bold serif mb-1">LINE 訂購</span>
+                    <span class="text-xs text-gray-500">最即時的專人服務</span>
+                </a>
+
+                <!-- Phone -->
+                <a href="tel:0909667106" class="buy-button p-8 rounded-2xl border border-gray-800 text-center flex flex-col items-center scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="w-12 h-12 mb-4 flex items-center justify-center text-[#d4a373]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+                    </div>
+                    <span class="font-bold serif mb-1">來電購買</span>
+                    <span class="text-xs text-gray-500">0909-667-106</span>
+                </a>
+
+                <!-- Shopee -->
+                <a href="https://shopee.tw/product/8946831/51256593700/" target="_blank" class="buy-button p-8 rounded-2xl border border-gray-800 text-center flex flex-col items-center scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="w-12 h-12 mb-4 flex items-center justify-center text-[#d4a373]">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10"><path d="M15.422 17.202c-.378 0-.685-.303-.685-.675 0-.372.307-.675.685-.675.378 0 .685.303.685.675 0 .372-.307.675-.685.675zm-6.273 0c-.378 0-.685-.303-.685-.675 0-.372.307-.675.685-.675.378 0 .685.303.685.675 0 .372-.307.675-.685.675zm9.851-12.632l-1.392 7.788c-.066.372-.416.634-.823.634H7.116c-.407 0-.757-.262-.823-.634L4.9 4.57H2.684v1.35h1.565l2.138 11.973c.066.372.416.634.823.634h10.38c.407 0 .757-.262.823-.634l1.392-7.788H18.24l-1.241 6.94H7.954l-1.241-6.94h13.048V4.57h-1.761zM11.234 2c-.382 0-.693.303-.693.675 0 .372.311.675.693.675h1.532c.382 0 .693-.303.693-.675 0-.372-.311-.675-.693-.675h-1.532z"/></svg>
+                    </div>
+                    <span class="font-bold serif mb-1">蝦皮購買</span>
+                    <span class="text-xs text-gray-500">多樣化金流支付</span>
+                </a>
+
+                <!-- MyShip -->
+                <a href="https://myship.7-11.com.tw/general/detail/GM2601011214904" target="_blank" class="buy-button p-8 rounded-2xl border border-gray-800 text-center flex flex-col items-center scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="w-12 h-12 mb-4 flex items-center justify-center text-[#d4a373]">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124l-.847-7.013a1.125 1.125 0 0 0-1.112-1.011H14.25V5.625A1.125 1.125 0 0 0 13.125 4.5h-2.25a1.125 1.125 0 0 0-1.125 1.125V11.25H2.25V4.5m12 11.25V11.25m0 0h6" /></svg>
+                    </div>
+                    <span class="font-bold serif mb-1">賣貨便</span>
+                    <span class="text-xs text-gray-500">超商取貨付款</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 text-center border-t border-gray-900 bg-black">
+        <div class="scroll-reveal">
+            <div class="text-2xl font-bold tracking-widest serif text-[#d4a373] mb-8">IN BETWEEN</div>
+            <p class="text-gray-600 mb-8 max-w-md mx-auto px-6">遊走於風味的交界，找到屬於您的平衡點。</p>
+            <div class="mt-20 text-xs text-gray-600 tracking-widest uppercase">
+                © 2026 Kaffa Forest Coffee Roasters. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 捲動顯現動畫
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // 平滑捲動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
